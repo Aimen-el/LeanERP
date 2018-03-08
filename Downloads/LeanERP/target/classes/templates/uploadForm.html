@@ -1,0 +1,52 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div th:if="${message}">
+		<h2 th:text="${message}"/>
+	</div>
+	
+	<div >
+		<form method="POST" enctype="multipart/form-data" action="/uploadForm">
+			<div class="form-group">
+				<label for="username">Nom d'utilisateur: </label>
+				<input type="text" class="form-control" id="username" placeholder="Enter UserName" name="username"/>
+				<span class="error"></span>
+			</div>
+			<div class="form-group">
+				<label for="name">nom du ficher </label>
+				<input type="text" class="form-control" id="name" placeholder="Enter le nm du fichier" name="name"/>
+				<span class="error"></span>
+			</div>
+			<div class="form-group">
+				<label for="dateupload">date </label>
+				<input type="date" class="form-control" id="dateupload"  name="dateupload"/>
+				<span class="error"></span>
+			</div>
+			<div class="form-group">
+				<label for="etat">etat </label>
+				<input type="text" class="form-control" id="etat" placeholder="Enter l'etat" name="etat"/>
+				<span class="error"></span>
+			</div>
+			<div class="form-group">
+				<label for="motif">motif </label>
+				<input type="text" class="form-control" id="motif" placeholder="Enter le motif" name="motif"/>
+				<span class="error"></span>
+			</div>
+			<table>
+				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
+				<tr><td></td><td><input type="submit" value="Upload" /></td></tr>
+			</table>
+		</form>
+	</div>
+
+
+	<div>
+		<ul>
+			<li th:each="file : ${files}">
+				<a th:href="${file}" th:text="${file}" />
+			</li>
+		</ul>
+	</div>
+
+</body>
+</html>

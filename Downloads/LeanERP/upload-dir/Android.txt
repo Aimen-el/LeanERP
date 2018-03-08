@@ -1,0 +1,23 @@
+I- LES COMPOSANTS D'ANDROID:
+	1) Activity: Interface + Traitement
+	2) Service: Sans interface + Traitement
+	3) Content Provider(fournisseur du contenu): besoin des ressources
+	4) Broadcast Resever: lier avec le reseaux
+
+II- Fichier de configuration: AndroidManifest
+
+III- Intent: passage entre les activites, on a deux types:
+	1) Intent simple
+	2) Intent par classe: c.a.d on cree une classe Intent qui permet les passage d'une activite a une autre
+_________________________________________________________________________-
+BD Android:
+OpenHelper: initialisation de la base
+tjrs dans la creation d'une BD on doit avoir une classe representative de la base
+Disign pattern: Factoring
+______________________
+public long inserMoadel(Model model){
+	ContentValues valeurs = new ContentValues();
+	valeurs.put(COLONNE_NOM1, model.getNOM1());
+	valeurs.put(COLONNE_NOM2, model.getNOM2());
+
+}
