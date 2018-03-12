@@ -24,7 +24,7 @@ public class NoteFrais implements Serializable {
 	private String name;
 	private Date dateupload;
 	private String chemin;
-	private Boolean etat;
+	private Boolean etat=true;
 	private String motif;
 	@ManyToMany
 	@JoinTable(name="USER_UPLOAD")
@@ -83,12 +83,20 @@ public class NoteFrais implements Serializable {
 		this.chemin = chemin;
 		this.etat = etat;
 	}
-	public NoteFrais(String userename, String name, Date dateupload, String chemin, Boolean etat, String motif) {
+	public NoteFrais(String userename, String name, Date dateupload, Boolean etat, String motif) {
 		super();
 		this.userename = userename;
 		this.name = name;
 		this.dateupload = dateupload;
-		this.chemin = chemin;
+		this.etat = etat;
+		this.motif = motif;
+	}
+	public NoteFrais(String userename, String name, Date dateupload,String chemin, Boolean etat, String motif) {
+		super();
+		this.userename = userename;
+		this.name = name;
+		this.dateupload = dateupload;
+		this.chemin=chemin;
 		this.etat = etat;
 		this.motif = motif;
 	}

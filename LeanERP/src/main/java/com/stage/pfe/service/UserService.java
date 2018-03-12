@@ -3,18 +3,19 @@ package com.stage.pfe.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stage.pfe.dao.RoleRepository;
-import com.stage.pfe.dao.UserRepository;
+import com.stage.pfe.dao.UserReository;
 import com.stage.pfe.entities.Role;
 import com.stage.pfe.entities.User;
-
 @RestController
 public class UserService {
 	@Autowired
-	private UserRepository userReository;
+	private UserReository userReository;
 	
 	@RequestMapping(value="/addUser")
 	public User save(User u) {

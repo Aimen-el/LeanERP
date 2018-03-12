@@ -13,8 +13,8 @@ com/stage/pfe/entities/Role.class
 com/stage/pfe/service/UserService.class
 com/stage/pfe/metier/NoteFraisMetier.class
 com/stage/pfe/metier/INoteFrais.class
+com/stage/pfe/dao/UserReository.class
 com/stage/pfe/dao/RoleRepository.class
-com/stage/pfe/dao/UserRepository.class
 com/stage/pfe/storage/StorageService.class
 com/stage/pfe/SecurityConfig.class
 com/stage/pfe/storage/StorageProperties.class

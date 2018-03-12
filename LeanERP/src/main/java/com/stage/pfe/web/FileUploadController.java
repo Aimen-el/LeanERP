@@ -1,10 +1,12 @@
 package com.stage.pfe.web;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import com.stage.pfe.dao.UploadRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,11 +30,14 @@ import com.stage.pfe.metier.INoteFrais;
 import com.stage.pfe.storage.StorageFileNotFoundException;
 import com.stage.pfe.storage.StorageService;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class FileUploadController {
 	@Autowired
 	private INoteFrais noteFaisMetier;
-
+    @Autowired
+    private UploadRepository uploadRepository;
     private final StorageService storageService;
 
     @Autowired
@@ -40,11 +45,12 @@ public class FileUploadController {
         this.storageService = storageService;
     }
     
-    @RequestMapping(value="/uploadForm")
+   /* @RequestMapping(value="/uploadForm")
     public String noteFrais(Model model, String userename, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, String chemin, Boolean etat, String motif){
 		NoteFrais nf= noteFaisMetier.enregister(userename, userename, dateupload, chemin, etat, motif);
+
         return "uploadForm";
-    }
+    }*/
 	
     @GetMapping("/uploadForm")
     public String listUploadedFiles(Model model) throws IOException {
@@ -68,9 +74,17 @@ public class FileUploadController {
 
     @PostMapping("/uploadForm")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes) {
+            RedirectAttributes redirectAttributes,HttpServletRequest request,Model model, String userename, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, Boolean etat, String motif) {
 
         storageService.store(file);
+        // Chemin Local
+       String absolutePath = new File("upload-dir/"+file.getOriginalFilename()).getAbsolutePath();
+    NoteFrais noteFrais =new NoteFrais(userename,name,dateupload,etat,motif);
+       noteFrais.setChemin(absolutePath);
+        //Lien de téléchargement
+       // nf.setChemin(request.getLocalName()+":"+request.getLocalPort()+"/files/"+file.getOriginalFilename());
+        uploadRepository.save(noteFrais);
+
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 
