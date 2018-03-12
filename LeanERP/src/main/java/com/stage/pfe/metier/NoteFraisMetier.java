@@ -21,9 +21,9 @@ public class NoteFraisMetier implements INoteFrais {
 	}
 
 	@Override
-	public NoteFrais enregister(String userename, String name, Date dateupload, String chemin, Boolean etat,
+	public NoteFrais enregister(String username, String name, Date dateupload, String chemin, Boolean etat,
 			String motif) {
-		NoteFrais nf = new NoteFrais(userename, name, dateupload, chemin, etat, motif);
+		NoteFrais nf = new NoteFrais(username, name, dateupload, chemin, etat, motif);
 		return uploadRepository.save(nf);
 	}
 

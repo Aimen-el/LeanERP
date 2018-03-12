@@ -20,7 +20,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class NoteFrais implements Serializable {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	private long id;
-	private String userename;
+	private String username;
 	private String name;
 	private Date dateupload;
 	private String chemin;
@@ -35,11 +35,11 @@ public class NoteFrais implements Serializable {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getUserename() {
-		return userename;
+	public String getusername() {
+		return username;
 	}
-	public void setUserename(String userename) {
-		this.userename = userename;
+	public void setusername(String username) {
+		this.username = username;
 	}
 	public String getName() {
 		return name;
@@ -75,36 +75,36 @@ public class NoteFrais implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public NoteFrais(String userename, String name, Date dateupload, String chemin, Boolean etat) {
+	public NoteFrais(String username, String name, Date dateupload, String chemin, Boolean etat) {
 		super();
-		this.userename = userename;
+		this.username = username;
 		this.name = name;
 		this.dateupload = dateupload;
 		this.chemin = chemin;
 		this.etat = etat;
 	}
-	public NoteFrais(String userename, String name, Date dateupload, Boolean etat, String motif) {
+	public NoteFrais(String username, String name, Date dateupload, Boolean etat, String motif) {
 		super();
-		this.userename = userename;
+		this.username = username;
 		this.name = name;
 		this.dateupload = dateupload;
 		this.etat = etat;
 		this.motif = motif;
 	}
-	public NoteFrais(String userename, String name, Date dateupload,String chemin, Boolean etat, String motif) {
+	public NoteFrais(String username, String name, Date dateupload,String chemin, Boolean etat, String motif) {
 		super();
-		this.userename = userename;
+		this.username = username;
 		this.name = name;
 		this.dateupload = dateupload;
 		this.chemin=chemin;
 		this.etat = etat;
 		this.motif = motif;
 	}
-	public NoteFrais(long id, String userename, String name, Date dateupload, String chemin, Boolean etat, String motif,
+	public NoteFrais(long id, String username, String name, Date dateupload, String chemin, Boolean etat, String motif,
 			Collection<User> users) {
 		super();
 		this.id = id;
-		this.userename = userename;
+		this.username = username;
 		this.name = name;
 		this.dateupload = dateupload;
 		this.chemin = chemin;

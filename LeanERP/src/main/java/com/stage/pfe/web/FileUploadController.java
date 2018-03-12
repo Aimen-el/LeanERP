@@ -46,8 +46,8 @@ public class FileUploadController {
     }
     
    /* @RequestMapping(value="/uploadForm")
-    public String noteFrais(Model model, String userename, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, String chemin, Boolean etat, String motif){
-		NoteFrais nf= noteFaisMetier.enregister(userename, userename, dateupload, chemin, etat, motif);
+    public String noteFrais(Model model, String username, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, String chemin, Boolean etat, String motif){
+		NoteFrais nf= noteFaisMetier.enregister(username, username, dateupload, chemin, etat, motif);
 
         return "uploadForm";
     }*/
@@ -74,12 +74,12 @@ public class FileUploadController {
 
     @PostMapping("/uploadForm")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes,HttpServletRequest request,Model model, String userename, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, Boolean etat, String motif) {
+            RedirectAttributes redirectAttributes,HttpServletRequest request,Model model, String username, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, Boolean etat, String motif) {
 
         storageService.store(file);
         // Chemin Local
        String absolutePath = new File("upload-dir/"+file.getOriginalFilename()).getAbsolutePath();
-    NoteFrais noteFrais =new NoteFrais(userename,name,dateupload,etat,motif);
+    NoteFrais noteFrais =new NoteFrais(username,name,dateupload,etat,motif);
        noteFrais.setChemin(absolutePath);
         //Lien de téléchargement
        // nf.setChemin(request.getLocalName()+":"+request.getLocalPort()+"/files/"+file.getOriginalFilename());

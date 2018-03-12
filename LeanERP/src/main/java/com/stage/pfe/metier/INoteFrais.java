@@ -7,6 +7,6 @@ import com.stage.pfe.entities.NoteFrais;
 
 public interface INoteFrais {
 	public NoteFrais consulterNoteFrais(long id);
-	public NoteFrais enregister(String userename, String name, Date dateupload, String chemin, Boolean etat, String motif);
+	public NoteFrais enregister(String username, String name, Date dateupload, String chemin, Boolean etat, String motif);
 
 }

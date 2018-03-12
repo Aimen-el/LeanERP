@@ -30,8 +30,8 @@ public class NoteFraisController {
     }
 	*/
 	@RequestMapping(value="/noteFrais")
-    public String noteFrais(Model model, String userename, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, String chemin, Boolean etat, String motif){
-		NoteFrais nf= noteFaisMetier.enregister(userename, userename, dateupload, chemin, etat, motif);
+    public String noteFrais(Model model, String username, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, String chemin, Boolean etat, String motif){
+		NoteFrais nf= noteFaisMetier.enregister(username, username, dateupload, chemin, etat, motif);
 				return "noteFrais";
     }
 }
