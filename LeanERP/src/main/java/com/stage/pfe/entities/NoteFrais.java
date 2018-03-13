@@ -75,6 +75,8 @@ public class NoteFrais implements Serializable {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+
 	public NoteFrais(String username, String name, Date dateupload, String chemin, Boolean etat) {
 		super();
 		this.username = username;
@@ -113,5 +115,24 @@ public class NoteFrais implements Serializable {
 		this.users = users;
 	}
 
+	public NoteFrais(Boolean etat, String motif) {
+		this.etat = etat;
+		this.motif = motif;
+	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Collection<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Collection<User> users) {
+		this.users = users;
+	}
 }

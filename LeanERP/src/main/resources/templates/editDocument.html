@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<head></head>
+<body>
+<div class="span12">
+    <table id="myTableId" dt:table="true">
+        <thead>
+        <tr>
+            <th>Document Title</th>
+            <th>Document Path</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="file, stat : ${notefrais}">
+            <td th:text="${file.getName()}" ></td>
+            <td th:text="${file.getChemin()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -3,7 +3,10 @@ package com.stage.pfe.web;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.stage.pfe.dao.UploadRepository;
@@ -12,15 +15,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -51,17 +50,28 @@ public class FileUploadController {
 
         return "uploadForm";
     }*/
-	
+
     @GetMapping("/uploadForm")
     public String listUploadedFiles(Model model) throws IOException {
 
-        model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toString())
-                .collect(Collectors.toList()));
-
         return "uploadForm";
     }
+    @GetMapping("/editDocument")
+    public String listFiles(Model model) throws IOException {
+        List<NoteFrais> noteFrais=null;
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+    if (auth.getName().equals("admin"))
+    {
+        noteFrais=uploadRepository.findAll();
+        model.addAttribute("notefrais",noteFrais);
+
+    }else {
+        noteFrais = uploadRepository.findAllByUsername(auth.getName());
+
+        model.addAttribute("notefrais", noteFrais);
+    }
+            return "editDocument";
+        }
 
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
@@ -74,13 +84,21 @@ public class FileUploadController {
 
     @PostMapping("/uploadForm")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-            RedirectAttributes redirectAttributes,HttpServletRequest request,Model model, String username, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, Boolean etat, String motif) {
+            RedirectAttributes redirectAttributes,HttpServletRequest request,Model model,Boolean etat, String motif) {
 
         storageService.store(file);
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         // Chemin Local
        String absolutePath = new File("upload-dir/"+file.getOriginalFilename()).getAbsolutePath();
-    NoteFrais noteFrais =new NoteFrais(username,name,dateupload,etat,motif);
-       noteFrais.setChemin(absolutePath);
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Date date = new Date();
+
+        NoteFrais noteFrais =new NoteFrais(etat,motif);
+             noteFrais.setDateupload(date);
+             noteFrais.setName(file.getOriginalFilename());
+            noteFrais.setusername(auth.getName());
+
+        noteFrais.setChemin(absolutePath);
         //Lien de téléchargement
        // nf.setChemin(request.getLocalName()+":"+request.getLocalPort()+"/files/"+file.getOriginalFilename());
         uploadRepository.save(noteFrais);
