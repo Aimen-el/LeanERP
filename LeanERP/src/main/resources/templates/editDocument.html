@@ -3,6 +3,9 @@
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head></head>
 <body>
+	<div>
+		<a style="color: blue" th:href="@{/logout}">logout</a>
+	</div>
 <div class="span12">
 <a th:href="@{/uploadForm}">Ajouter un nouveau document</a>
     <table id="myTableId" dt:table="true">
