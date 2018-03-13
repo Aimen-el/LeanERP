@@ -8,12 +8,14 @@
     <table id="myTableId" dt:table="true">
         <thead>
         <tr>
+        	<th>Nom d'utilisateur</th>
             <th>Document Title</th>
             <th>Document Path</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="file, stat : ${notefrais}">
+        	<td th:text="${file.getUsername()}" ></td>
             <td th:text="${file.getName()}" ></td>
             <td th:text="${file.getChemin()}"></td>
             <td>
