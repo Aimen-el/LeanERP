@@ -17,6 +17,7 @@ import com.stage.pfe.dao.UserReository;
 import com.stage.pfe.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.solr.core.RequestMethod;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +28,14 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.stage.pfe.entities.NoteFrais;
-import com.stage.pfe.metier.INoteFrais;
 import com.stage.pfe.storage.StorageFileNotFoundException;
 import com.stage.pfe.storage.StorageService;
 
@@ -41,8 +43,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class FileUploadController {
-	@Autowired
-	private INoteFrais noteFaisMetier;
     @Autowired
     private UploadRepository uploadRepository;
     @Autowired
@@ -53,13 +53,6 @@ public class FileUploadController {
     public FileUploadController(StorageService storageService) {
         this.storageService = storageService;
     }
-    
-   /* @RequestMapping(value="/uploadForm")
-    public String noteFrais(Model model, String username, String name, @DateTimeFormat(pattern = "yyyy-MM-dd") Date dateupload, String chemin, Boolean etat, String motif){
-		NoteFrais nf= noteFaisMetier.enregister(username, username, dateupload, chemin, etat, motif);
-
-        return "uploadForm";
-    }*/
 
     @GetMapping("/uploadForm")
     public String listUploadedFiles(Model model) throws IOException {
@@ -86,7 +79,30 @@ public class FileUploadController {
     }
             return "editDocument";
         }
-
+    
+    
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable("id") long id) {
+    	uploadRepository.delete(uploadRepository.findOne(id));
+    	return "redirect:/editDocument";
+    }
+    
+/*    @RequestMapping("/edit/{id}")
+    public String edit(@PathVariable("id") long id, Model model) {
+    	model.addAttribute("noteFrais", uploadRepository.findOne(id));
+    	return "edit";
+    }
+    
+    @PostMapping("/edit/{id}")
+    public String edit(@ModelAttribute("noteFrais") NoteFrais noteFrais, ModelMap modelMap) {
+    	NoteFrais currentNoteFrais = uploadRepository.findOne(noteFrais.getId());
+    	currentNoteFrais.setEtat(noteFrais.getEtat());
+    	currentNoteFrais.setMotif(noteFrais.getMotif());
+    	
+    	uploadRepository.save(noteFrais);
+    	return "redirect:/editDocument";
+    }*/
+    
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
