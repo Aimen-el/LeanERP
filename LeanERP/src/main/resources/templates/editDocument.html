@@ -18,7 +18,7 @@
             <td th:text="${file.getChemin()}"></td>
             <td>
             	<a th:href="@{/edit/{id}(id=${file.id})}" class="btn btn-primary btn-xs">modifier</a>
-            	<a th:href="@{/delete/{id}(id=${file.id})}" class="btn btn-primary btn-xs">supprimer</a>
+            	<a th:href="@{/delete/{id}(id=${file.id})}" onclick="return confirm('Are you sure?')">supprimer</a>
             </td>
         </tr>
         </tbody>
