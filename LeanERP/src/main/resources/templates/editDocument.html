@@ -4,6 +4,7 @@
 <head></head>
 <body>
 <div class="span12">
+<a th:href="@{/uploadForm}">Ajouter un nouveau document</a>
     <table id="myTableId" dt:table="true">
         <thead>
         <tr>
@@ -15,6 +16,10 @@
         <tr th:each="file, stat : ${notefrais}">
             <td th:text="${file.getName()}" ></td>
             <td th:text="${file.getChemin()}"></td>
+            <td>
+            	<a th:href="@{/edit/{id}(id=${file.id})}" class="btn btn-primary btn-xs">modifier</a>
+            	<a th:href="@{/delete/{id}(id=${file.id})}" class="btn btn-primary btn-xs">supprimer</a>
+            </td>
         </tr>
         </tbody>
     </table>
