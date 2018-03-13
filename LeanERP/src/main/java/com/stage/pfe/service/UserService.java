@@ -42,7 +42,6 @@ public class UserService {
 	public User addRoleToUser(String username, String role) {
 		User u= userReository.findOne(username);
 		Role r = roleRepository.findOne(role);
-		u.getRoles().add(r);
 		userReository.save(u);
 		return u;
 		

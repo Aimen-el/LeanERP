@@ -1,22 +1,30 @@
 package com.stage.pfe.web;
+import org.springframework.security.core.Authentication;
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.stage.pfe.dao.UploadRepository;
+import com.stage.pfe.dao.UserReository;
+import com.stage.pfe.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +45,8 @@ public class FileUploadController {
 	private INoteFrais noteFaisMetier;
     @Autowired
     private UploadRepository uploadRepository;
+    @Autowired
+    private UserReository userReository;
     private final StorageService storageService;
 
     @Autowired
@@ -57,10 +67,14 @@ public class FileUploadController {
         return "uploadForm";
     }
     @GetMapping("/editDocument")
-    public String listFiles(Model model) throws IOException {
+    public String listFiles(Model model,Authentication authentication) throws IOException {
         List<NoteFrais> noteFrais=null;
+        //UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-    if (auth.getName().equals("admin"))
+        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        boolean authorized = authorities.contains(new SimpleGrantedAuthority("ADMIN"));
+
+    if (authorized)
     {
         noteFrais=uploadRepository.findAll();
         model.addAttribute("notefrais",noteFrais);

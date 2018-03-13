@@ -15,6 +15,7 @@
 /Users/aimen/Documents/GitHub/LeanERP/LeanERP/src/main/java/com/stage/pfe/metier/INoteFrais.java
 /Users/aimen/Documents/GitHub/LeanERP/LeanERP/src/main/java/com/stage/pfe/dao/RoleRepository.java
 /Users/aimen/Documents/GitHub/LeanERP/LeanERP/src/main/java/com/stage/pfe/PfeEnsemApplication.java
+/Users/aimen/Documents/GitHub/LeanERP/LeanERP/src/main/java/com/stage/pfe/AppConfig.java
 /Users/aimen/Documents/GitHub/LeanERP/LeanERP/src/main/java/com/stage/pfe/service/UploadFileService.java
 /Users/aimen/Documents/GitHub/LeanERP/LeanERP/src/main/java/com/stage/pfe/storage/StorageFileNotFoundException.java
 /Users/aimen/Documents/GitHub/LeanERP/LeanERP/src/main/java/com/stage/pfe/metier/NoteFraisMetier.java

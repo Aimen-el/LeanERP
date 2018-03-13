@@ -1,6 +1,7 @@
 com/stage/pfe/entities/User.class
 com/stage/pfe/web/FileUploadController.class
 com/stage/pfe/storage/FileSystemStorageService.class
+com/stage/pfe/AppConfig.class
 com/stage/pfe/storage/StorageException.class
 com/stage/pfe/storage/StorageFileNotFoundException.class
 com/stage/pfe/PfeEnsemApplication.class

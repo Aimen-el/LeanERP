@@ -1,13 +1,14 @@
 package com.stage.pfe.entities;
 
+import org.springframework.data.repository.Repository;
+
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 @Entity
 @Table(name="users")
 public class User implements Serializable {
@@ -15,21 +16,15 @@ public class User implements Serializable {
 	private String username;
 	private String password;
 	private Boolean enabled;
-	public User(String username, String password, Boolean enabled) {
-		super();
-		this.username = username;
-		this.password = password;
-		this.enabled = enabled;
-	}
-	public Boolean getEnabled() {
+
+
+
+    public Boolean getEnabled() {
 		return enabled;
 	}
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-	@ManyToMany
-	@JoinTable(name="USER_ROLES")
-	private Collection<Role> roles;
 	public String getUsername() {
 		return username;
 	}
@@ -42,12 +37,6 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Collection<Role> getRoles() {
-		return roles;
-	}
-	public void setRoles(Collection<Role> roles) {
-		this.roles = roles;
-	}
 	public User(String username, String password) {
 		super();
 		this.username = username;
@@ -56,5 +45,5 @@ public class User implements Serializable {
 	public User() {
 		super();
 	}
-	
+
 }
