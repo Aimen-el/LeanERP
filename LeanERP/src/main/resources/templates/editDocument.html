@@ -13,17 +13,21 @@
         <tr>
         	<th>Nom d'utilisateur</th>
             <th>Document Title</th>
-            <th>Document Path</th>
+            <th>date</th>
+            <th>etat</th>
+            <th>Suprrimer</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="file, stat : ${notefrais}">
         	<td th:text="${file.getUsername()}" ></td>
             <td th:text="${file.getName()}" ></td>
-            <td th:text="${file.getChemin()}"></td>
+            <td th:text="${file.getDateupload()}"></td>
+            <td th:text="${file.getEtat()}"></td>
+            <td><a th:href="@{/delete/{id}(id=${file.id})}" onclick="return confirm('Are you sure?')">supprimer</a></td>
             <td>
             	<a th:href="@{/edit/{id}(id=${file.id})}" class="btn btn-primary btn-xs">modifier</a>
-            	<a th:href="@{/delete/{id}(id=${file.id})}" onclick="return confirm('Are you sure?')">supprimer</a>
+            	
             </td>
         </tr>
         </tbody>
