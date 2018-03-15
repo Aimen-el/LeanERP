@@ -19,6 +19,8 @@
             <td>
             	<a th:href="@{/edit/{id}(id=${file.id})}" class="btn btn-primary btn-xs">modifier</a>
             	<a th:href="@{/delete/{id}(id=${file.id})}" onclick="return confirm('Are you sure?')">supprimer</a>
+                <a th:href="@{/download/{id}(id=${file.id})}"  class="btn btn-primary btn-xs">Download</a>
+
             </td>
         </tr>
         </tbody>

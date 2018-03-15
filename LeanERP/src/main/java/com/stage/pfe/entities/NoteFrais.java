@@ -5,13 +5,7 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -76,6 +70,14 @@ public class NoteFrais implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public NoteFrais(String username, String name, String chemin, Boolean etat, String motif) {
+		this.username = username;
+		this.name = name;
+		this.chemin = chemin;
+		this.etat = etat;
+		this.motif = motif;
+	}
 
 	public NoteFrais(String username, String name, Date dateupload, String chemin, Boolean etat) {
 		super();
