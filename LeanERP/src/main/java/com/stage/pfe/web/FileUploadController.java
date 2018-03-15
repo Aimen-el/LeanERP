@@ -4,12 +4,22 @@ import org.springframework.security.core.Authentication;
 
 import java.io.File;
 import java.io.IOException;
+
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import com.stage.pfe.dao.UploadRepository;
 import com.stage.pfe.dao.UserReository;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -33,8 +43,12 @@ import com.stage.pfe.entities.NoteFrais;
 import com.stage.pfe.storage.StorageFileNotFoundException;
 import com.stage.pfe.storage.StorageService;
 
+
+
 import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpServletResponse;
+
 import javax.validation.Valid;
 
 @Controller
@@ -77,6 +91,10 @@ public class FileUploadController {
     }
 
 
+
+    
+    /********************** Delete ******************/
+
     @RequestMapping("/delete/{id}")
     public String delete(@PathVariable("id") long id) {
         uploadRepository.delete(uploadRepository.findOne(id));
@@ -92,12 +110,12 @@ public class FileUploadController {
     }
 
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public String edit(@PathVariable("id") long id, ModelMap model) {
-        model.addAttribute("noteFrais", this.uploadRepository.findOne(id));
-        return "edit";
-
-    }
+//    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+//    public String edit(@PathVariable("id") long id, ModelMap model) {
+//        model.addAttribute("noteFrais", this.uploadRepository.findOne(id));
+//        return "edit";
+//
+//    }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("noteFrais") NoteFrais noteFrais, BindingResult result) {
@@ -106,6 +124,43 @@ public class FileUploadController {
     }
 
 
+
+    
+    
+   /******************************** Update **********************/
+   @RequestMapping(value="/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable("id") long id, ModelMap modelMap) {
+	   modelMap.put("noteFrais", uploadRepository.findOne(id));
+    	//model.addAttribute("noteFrais", uploadRepository.findOne(id));
+    	return "edit";
+    }
+   
+//   @RequestMapping(value="/edit", method = RequestMethod.POST)
+//   public String edit(@RequestParam("file") MultipartFile file,
+//		   @ModelAttribute("noteFrais") NoteFrais noteFrais,
+//		   ModelMap modelMap) {
+//	   storageService.store(file);
+//       Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//       // Chemin Local
+//	   String absolutePath = new File("upload-dir/"+file.getOriginalFilename()).getAbsolutePath();
+//       DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//       Date date = new Date();
+//
+//       NoteFrais nf = uploadRepository.findOne(noteFrais.getId());
+//       nf.setId(noteFrais.getId());
+//	   nf.setEtat(noteFrais.getEtat());
+//	   nf.setMotif(noteFrais.getMotif());
+//	   nf.setDateupload(date);
+//       nf.setName(file.getOriginalFilename());
+//       nf.setusername(auth.getName());
+//       nf.setChemin(absolutePath);
+//
+//		   uploadRepository.save(nf);
+//		   return "redirect:/editDocument";
+//   }
+    
+ 
+    
     @GetMapping("/files/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
@@ -133,6 +188,8 @@ public class FileUploadController {
 
         noteFrais.setChemin(absolutePath);
 
+        //Lien de téléchargement
+        //noteFrais.setChemin(request.getLocalName()+":"+request.getLocalPort()+"/files/"+file.getOriginalFilename());
         uploadRepository.save(noteFrais);
 
         redirectAttributes.addFlashAttribute("message",

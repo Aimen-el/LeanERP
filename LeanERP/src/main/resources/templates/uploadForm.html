@@ -3,7 +3,9 @@
 
 
 <body>
-
+	<div>
+		<a style="color: blue" th:href="@{/logout}">logout</a>
+	</div>
 	<div th:if="${message}">
 		<h2 th:text="${message}"/>
 	</div>
@@ -29,7 +31,6 @@
 		</form>
 	</div>
 	<a th:href="@{/editDocument}">consulter mes documents</a>
-
 
 </body>
 </html>

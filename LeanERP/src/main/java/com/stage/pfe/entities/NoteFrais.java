@@ -5,7 +5,18 @@ import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Date;
 
+
 import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -13,12 +24,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name="upload")
 public class NoteFrais implements Serializable {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private long id;	
 	private String username;
 	private String name;
 	private Date dateupload;
 	private String chemin;
-	private Boolean etat=true;
+	private Boolean etat=true;	
 	private String motif;
 	@ManyToMany
 	@JoinTable(name="USER_UPLOAD")

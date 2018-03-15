@@ -3,23 +3,34 @@
       xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
 <head></head>
 <body>
+	<div>
+		<a style="color: blue" th:href="@{/logout}">logout</a>
+	</div>
 <div class="span12">
 <a th:href="@{/uploadForm}">Ajouter un nouveau document</a>
     <table id="myTableId" dt:table="true">
         <thead>
         <tr>
+        	<th>Nom d'utilisateur</th>
             <th>Document Title</th>
-            <th>Document Path</th>
+            <th>date</th>
+            <th>etat</th>
+            <th>Suprrimer</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="file, stat : ${notefrais}">
+        	<td th:text="${file.getUsername()}" ></td>
             <td th:text="${file.getName()}" ></td>
-            <td th:text="${file.getChemin()}"></td>
+            <td th:text="${file.getDateupload()}"></td>
+            <td th:text="${file.getEtat()}"></td>
+            <td><a th:href="@{/delete/{id}(id=${file.id})}" onclick="return confirm('Are you sure?')">supprimer</a></td>
             <td>
             	<a th:href="@{/edit/{id}(id=${file.id})}" class="btn btn-primary btn-xs">modifier</a>
-            	<a th:href="@{/delete/{id}(id=${file.id})}" onclick="return confirm('Are you sure?')">supprimer</a>
+
+
                 <a th:href="@{/download/{id}(id=${file.id})}"  class="btn btn-primary btn-xs">Download</a>
+
 
             </td>
         </tr>
