@@ -1,7 +1,0 @@
-virtualitation:
-
-Definition: 
-faire fonctionner, sur une meme machine physique,
-plusieurs systemes comme s'ils fonctionnaient sur
-des machines physiques distinctes.
-
