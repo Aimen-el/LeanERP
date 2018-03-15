@@ -10,27 +10,37 @@
 	<h1> Modifier la note de Frais</h1>
 	
 	<div >
-
-		<form method="POST" enctype="multipart/form-data" action="/edit" th:object="${noteFrais}">
+		<form action="#" th:action="@{/update}" th:object="${noteFrais}" method="post">
 
 
 			<div class="form-group">
-							
-				<label th:for="etat">etat </label>
-				<input type="checkbox" th:field="*{etat}"/>
+				<label for="etat">etat </label>
+				<input type="checkbox" id="etat" name="etat" th:field="*{etat}"/>
 				<input type="hidden" name="etat" value="false"/>
 			</div>
 			<div class="form-group">
-				<label th:for="motif">motif </label>
-				<input type="text" class="form-control" th:field="*{motif}"/>
+				<label for="motif">motif </label>
+				<input type="text" class="form-control" id="motif" placeholder="Enter le motif" name="motif" th:field="*{motif}"/>
 				<span class="error"></span>
 			</div>
-			<table>
-				<tr><td>File to upload:</td><td><input type="file" name="file" /></td></tr>
-				<tr><td></td><td><input type="submit" value="Upload" />								
-								</td></tr>
-			</table>
-			  <input type="hidden" th:field="*{id}"/>
+			<div class="form-group">
+				<span class="error"></span>
+			</div>
+			<input type="hidden" th:field="*{id}" />
+			<input type="hidden" th:field="*{chemin}" />
+			<input type="hidden" th:field="*{dateupload}" />
+			<input type="hidden" id="name" th:field="*{name}" />
+			<div class="form-group">
+				<label for="username">UserName :  </label>
+				<input type="text" id="username" th:field="*{username}" />
+			</div>
+
+
+			<div class="form-control">
+				<input type="reset" class="reset" value="Reset"/>
+				<input type="submit" class="register" value="save changes" />
+				<div class="clear"></div>
+			</div>
 		</form>
 	</div>
 	<a th:href="@{/editDocument}">consulter mes documents</a>
