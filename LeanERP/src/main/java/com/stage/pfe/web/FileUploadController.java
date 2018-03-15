@@ -119,6 +119,8 @@ public class FileUploadController {
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("noteFrais") NoteFrais noteFrais, BindingResult result) {
+        Date date =new Date();
+        noteFrais.setDateupload(date);
         this.uploadRepository.save(noteFrais);
         return "redirect:editDocument";
     }
