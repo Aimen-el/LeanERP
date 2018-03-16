@@ -3,27 +3,27 @@ package com.stage.pfe;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.stage.pfe.storage.StorageService;
 import com.stage.pfe.storage.StorageProperties;
 
-@SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 @EnableJpaRepositories(basePackages="com.stage.pfe.dao")
-public class PfeEnsemApplication {
+@SpringBootApplication
+public class PfeEnsemApplication extends SpringBootServletInitializer {
 
-	public static void main(String[] args) {
-		SpringApplication.run(PfeEnsemApplication.class, args);
-	}
-	
-
-    @Bean
-    CommandLineRunner init(StorageService storageService) {
-        return (args) -> {
-            storageService.init();
-        };
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(PfeEnsemApplication.class);
     }
+
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(PfeEnsemApplication.class, args);
+    }
+
 }
