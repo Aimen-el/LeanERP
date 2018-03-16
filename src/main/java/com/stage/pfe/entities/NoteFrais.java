@@ -1,30 +1,17 @@
 package com.stage.pfe.entities;
 
 import java.io.Serializable;
-import java.nio.file.Path;
 import java.util.Collection;
 import java.util.Date;
 
 
 import javax.persistence.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-
-
-import org.springframework.format.annotation.DateTimeFormat;
-
 @Entity
 @Table(name="upload")
 public class NoteFrais implements Serializable {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;	
+	private long id;
 	private String username;
 	private String name;
 	private Date dateupload;
@@ -37,7 +24,7 @@ public class NoteFrais implements Serializable {
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
+	public void setId(final long id) {
 		this.id = id;
 	}
 	public String getusername() {
