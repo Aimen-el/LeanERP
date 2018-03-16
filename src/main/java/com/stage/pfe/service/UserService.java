@@ -41,7 +41,6 @@ public class UserService {
 	@RequestMapping(value="/addRoleToUser")
 	public User addRoleToUser(String username, String role) {
 		User u= userReository.findOne(username);
-		Role r = roleRepository.findOne(role);
 		userReository.save(u);
 		return u;
 		
