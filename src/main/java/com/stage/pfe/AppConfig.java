@@ -16,8 +16,8 @@ public class AppConfig {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/erpdb");
-        driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("");
+        driverManagerDataSource.setUsername("consultant");
+        driverManagerDataSource.setPassword("consultant");
         return driverManagerDataSource;
     }
 
