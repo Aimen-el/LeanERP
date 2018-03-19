@@ -4,7 +4,7 @@ pipeline {
         maven 'mvn'
     }
     parameters {
-        string(name: 'tomcat', defaultValue: '35.180.47.231', description: 'Staging Server')
+        string(name: 'tomcat', defaultValue: 'ec2-35-180-47-231.eu-west-3.compute.amazonaws.com', description: 'Staging Server')
     }
 
     triggers {
