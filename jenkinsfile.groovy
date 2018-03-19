@@ -3,16 +3,12 @@ pipeline {
     tools {
         maven 'mvn'
     }
-    parameters {
-        string(name: 'tomcat', defaultValue: 'ec2-35-180-47-231.eu-west-3.compute.amazonaws.com', description: 'Staging Server')
-    }
-
     triggers {
-        pollSCM('* * * * *')
-    }
+         pollSCM('* * * * *')
+     }
 
-    stages {
-        stage('Build') {
+stages{
+        stage('Build'){
             steps {
                 sh 'mvn clean package'
             }
@@ -23,9 +19,9 @@ pipeline {
                 }
             }
         }
-        stage('Deploy to Staging') {
+        stage ('Deploy to Server'){
             steps {
-                sh "scp -i /Users/aimen/.ssh/tomcat.pem **/target/*.war ec2-user@${params.tomcat}:/var/lib/tomcat7/webapps"
+                build job: 'deploy'
             }
         }
     }
