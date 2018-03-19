@@ -25,7 +25,7 @@ pipeline {
         }
         stage('Deploy to Staging') {
             steps {
-                sh "scp -i /Users/aimen/Downloads/tomcat.pem **/target/*.war ec2-user@${params.tomcat}:/var/lib/tomcat7/webapps"
+                sh "scp -i /Users/aimen/.ssh/tomcat.pem **/target/*.war ec2-user@${params.tomcat}:/var/lib/tomcat7/webapps"
             }
         }
     }
