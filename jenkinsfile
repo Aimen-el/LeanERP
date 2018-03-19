@@ -1,9 +1,15 @@
 pipeline {
     agent any
-    tools {
-            maven 'mvn'
-        }
-    stages{
+
+    parameters {
+         string(name: 'tomcat', defaultValue: '35.180.47.231', description: 'Staging Server')
+    }
+
+    triggers {
+         pollSCM('* * * * *')
+     }
+
+stages{
         stage('Build'){
             steps {
                 sh 'mvn clean package'
@@ -15,9 +21,13 @@ pipeline {
                 }
             }
         }
-        stage ('Deploy to Server'){
-            steps {
-                build job: 'deploy'
+
+        stage ('Deployments'){
+                stage ('Deploy to Staging'){
+                    steps {
+                        sh "scp -i /Users/aimen/Downloads/tomcat.pem **/target/*.war ec2-user@${params.tomcat}:/var/lib/tomcat7/webapps"
+                    }
+                }
             }
         }
     }
