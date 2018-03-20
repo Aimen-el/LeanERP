@@ -2,44 +2,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-<link rel="stylesheet" href="/css/bootstrap.min.css"/>
-<link rel="stylesheet" href="/css/app.css"/>
 <head>
 <title>Espace de gestion des notes de frais</title>
 </head>
-<body ng-app="GoogleOAuth2Microservice" ng-controller="AppCtrl" ng-cloak="">
+<body>
+	<h1>Bienvenue  <span th:text="${user.getName()}"/> à la page d'acceuil!</h1>
 
-	<div class="container" style="margin-top: 50px;">
-		<!-- Login panel -->
-
-			<!-- End Login panel -->
-
-			<!-- Home panel.It will visible after successfull login -->
-			<div class="panel panel-default" ng-show="user">
-				<div class="panel-heading">
-					<img class="p-img" alt="" ng-src="{{user.userAuthentication.details.picture}}"/> Name: {{user.name}}
-				</div>
-				<div class="panel-body">
-					<div class="col-md-12">Email: {{user.userAuthentication.details.email}}</div>
-					<h1>Bienvenue  <span th:text="${user.getName()}"/> à la page d'acceuil!</h1>
-
-					<a style="color: blue" th:href="@{/uploadForm}">Upload file</a>
-					<br />
-					<a style="color: blue" th:href="@{/editDocument}">Manage Documents</a>
-					<br/>
-					<div class="col-md-12">
-						<a href="#" class="btn btn-default margin-top-5"
-						   ng-click="logout()"> Logout </a>
-					</div>
-				</div>
-			</div>
-			<!-- End Home Panel -->
-
-		</div>
-
-
-
-
+	<a style="color: blue" th:href="@{/uploadForm}">Upload file</a>
+	<br />
+	<a style="color: blue" th:href="@{/editDocument}">Manage Documents</a>
+	<br/>
+	<div class="col-md-12">
+		<a href="#" class="btn btn-default margin-top-5"
+		   ng-click="logout()"> Logout </a>
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 	<script type="text/javascript" src="/js/app.js"></script>
 	<script type="text/javascript" src="/js/controller.js"></script>
