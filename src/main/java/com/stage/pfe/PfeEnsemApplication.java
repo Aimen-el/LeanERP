@@ -8,7 +8,6 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableOAuth2Client;
 
 import com.stage.pfe.storage.StorageProperties;
 
@@ -17,7 +16,6 @@ import com.stage.pfe.storage.StorageProperties;
 @EnableConfigurationProperties(StorageProperties.class)
 @EnableJpaRepositories(basePackages="com.stage.pfe.dao")
 @SpringBootApplication
-@EnableOAuth2Sso
 public class PfeEnsemApplication extends SpringBootServletInitializer {
 
     @Override
