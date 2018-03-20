@@ -6,25 +6,19 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.security.Principal;
+
+@RestController
+@RequestMapping("/")
 public class UserController {
-	
-	@RequestMapping(value="/")
-    public String home(Model model){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        model.addAttribute("user",auth);
-        return "home";
-    }
-	
-	@RequestMapping(value="/login")
-    public String login(){
-        return "login";
-    }
 
-	/*@RequestMapping(value="/uploadForm")
-    public String uploadForm(){
-        return "uploadForm";
+    @RequestMapping(
+            value = "user",
+            method = RequestMethod.GET)
+    public Principal user(Principal user) {
+        return user;
     }
-*/
 }

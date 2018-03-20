@@ -1,0 +1,39 @@
+# Spring Boot configuration
+
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: consultant
+        url: jdbc:mysql://localhost:3306/erpdb
+        username: consultant
+    http:
+        multipart:
+            max-file-size: 128MB
+            max-request-size: 128MB
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            dialect: org.hibernate.dialect.MySQL5Dialect
+        show-sql: true
+    profiles:
+        active: google
+# Spring Security configuration
+security:
+  oauth2:
+    client:
+      clientId: 804680079735-frflm55k8alb56ct96t17gqf97cq7avv.apps.googleusercontent.com
+      clientSecret: phKR5GECy89vxjY5kG91c3eB
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope:
+        - openid
+        - email
+        - profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true
+# Server configuration
+server:
+ port: 8080
