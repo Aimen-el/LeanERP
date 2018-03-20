@@ -1,4 +1,4 @@
-package com.stage.pfe.service;
+package com.stage.pfe.storage;
 
 import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;

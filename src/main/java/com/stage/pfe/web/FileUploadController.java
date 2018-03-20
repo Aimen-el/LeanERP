@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -17,6 +20,9 @@ import com.stage.pfe.dao.UserReository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -35,7 +41,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.stage.pfe.entities.NoteFrais;
 import com.stage.pfe.storage.StorageFileNotFoundException;
-import com.stage.pfe.service.StorageService;
+import com.stage.pfe.storage.StorageService;
 
 
 

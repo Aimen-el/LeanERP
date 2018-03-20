@@ -1,5 +1,3 @@
-# Spring Boot configuration
-
 spring:
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
@@ -22,8 +20,8 @@ spring:
 security:
   oauth2:
     client:
-      clientId: 804680079735-frflm55k8alb56ct96t17gqf97cq7avv.apps.googleusercontent.com
-      clientSecret: phKR5GECy89vxjY5kG91c3eB
+      clientId: 804680079735-qk5lctsi4f1ligntr20fai0u3ctm0531.apps.googleusercontent.com
+      clientSecret: pNX8Xoz_DYfoUDohSxes46Lh
       accessTokenUri: https://www.googleapis.com/oauth2/v4/token
       userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
       clientAuthenticationScheme: form
@@ -34,6 +32,3 @@ security:
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
       preferTokenInfo: true
-# Server configuration
-server:
- port: 9000
