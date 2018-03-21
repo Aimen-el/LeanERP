@@ -67,7 +67,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// Starts authorizing configurations.
 				.authorizeRequests()
 				// Ignore the "/" and "/index.html"
-				.antMatchers("/**.html","/", "/**.js").permitAll()
+				.antMatchers("/**.html", "/**.js").permitAll()
 				// Authenticate all remaining URLs.
 				.anyRequest().fullyAuthenticated()
 				.and()
@@ -79,13 +79,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.logout()
 				.invalidateHttpSession(true)
 				// After successful logout the application will redirect to "/" path.
-				.logoutSuccessUrl("/")
+				.logoutSuccessUrl("/google/login")
 				.permitAll()
 				.and()
 				// Setting the filter for the URL "/google/login".
 				.addFilterAt(filter(), BasicAuthenticationFilter.class)
-				.csrf()
-				.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+				.csrf().disable()
+				;
 
 	}
 

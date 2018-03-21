@@ -142,6 +142,7 @@ public class FileUploadController {
 
         storageService.store(file);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
         // Chemin Local
         String absolutePath = new File("upload-dir/" + file.getOriginalFilename()).getAbsolutePath();
         Date date = new Date();

@@ -15,6 +15,16 @@ app.controller('AppCtrl', function ($http, $scope) {
     getUser();
 
     // method for logout
+    // var logout = function() {
+    //     $http.post("/logout", function() {
+    //         $scope("#user").html('');
+    //         $scope(".unauthenticated").show();
+    //         $scope(".authenticated").hide();
+    //     })
+    //     return true;
+    // }
+
+
     $scope.logout = function () {
         $http.post('/logout').success(function (res) {
             $scope.user = null;
