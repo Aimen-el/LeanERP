@@ -20,10 +20,29 @@ public class User implements Serializable {
 	private String principalId;
 	private String photo;
 	private String password;
+	private String ROLE;
 	@ManyToOne(cascade = CascadeType.ALL)
 	private Role role_id;
 
-	public User(String name, String email, String password,Role role_id) {
+	public String getROLE() {
+		return ROLE;
+	}
+
+	public void setROLE(String ROLE) {
+		this.ROLE = ROLE;
+	}
+
+	public User(String name, String email, String principalId, String photo, String password, String ROLE, Role role_id) {
+		this.name = name;
+		this.email = email;
+		this.principalId = principalId;
+		this.photo = photo;
+		this.password = password;
+		this.ROLE = ROLE;
+		this.role_id = role_id;
+	}
+
+	public User(String name, String email, String password, Role role_id) {
 
 		this.name = name;
 		this.email = email;

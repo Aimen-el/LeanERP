@@ -1,5 +1,6 @@
 package com.stage.pfe.web;
 
+import com.stage.pfe.entities.User;
 import org.springframework.security.core.Authentication;
 
 import java.io.File;
@@ -67,14 +68,14 @@ public class FileUploadController {
     }
 
     @GetMapping("/editDocument")
-    public String listFiles(Model model,OAuth2Authentication authentication) throws IOException {
+    public String listFiles(Model model, User currentUser, OAuth2Authentication authentication) throws IOException {
         List<NoteFrais> noteFrais = null;
         //UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         LinkedHashMap<String, String> details = (LinkedHashMap<String, String>)authentication.getUserAuthentication().getDetails();
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-
-        boolean authorized = authorities.contains(new SimpleGrantedAuthority("ADMIN"));
+        currentUser=userRepository.findByPrincipalId(details.get(("sub")));
+        boolean authorized = currentUser.getROLE().contains("ADMIN");
 
         if (authorized) {
             noteFrais = uploadRepository.findAll();
