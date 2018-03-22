@@ -16,7 +16,7 @@ import com.stage.pfe.storage.StorageProperties;
 @EnableConfigurationProperties(StorageProperties.class)
 @EnableJpaRepositories(basePackages="com.stage.pfe.dao")
 @SpringBootApplication
-@EnableOAuth2Sso
+
 public class PfeEnsemApplication extends SpringBootServletInitializer {
 
     @Override
@@ -27,5 +27,6 @@ public class PfeEnsemApplication extends SpringBootServletInitializer {
     public static void main(String[] args) throws Exception {
         SpringApplication.run(PfeEnsemApplication.class, args);
     }
+
 
 }

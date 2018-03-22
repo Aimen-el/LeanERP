@@ -13,37 +13,114 @@ import javax.persistence.*;
 @Table(name="users")
 public class User implements Serializable {
 	@Id
-	private String username;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int user_id;
+	private String name;
+	private String email;
+	private String principalId;
+	private String photo;
 	private String password;
-	private Boolean enabled;
+	@ManyToOne(cascade = CascadeType.ALL)
+	private Role role_id;
 
+	public User(String name, String email, String password,Role role_id) {
 
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.role_id = role_id;
+	}
 
-    public Boolean getEnabled() {
-		return enabled;
+	public String getPhoto() {
+
+		return photo;
 	}
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
+
+	public void setPhoto(String photo) {
+		this.photo = photo;
 	}
-	public String getUsername() {
-		return username;
+
+	public User(String name, String email, String principalId, String photo, String password, Role role_id) {
+		this.name = name;
+		this.email = email;
+		this.principalId = principalId;
+		this.photo = photo;
+		this.password = password;
+		this.role_id = role_id;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+
+	public String getPrincipalId() {
+
+		return principalId;
 	}
+
+	public void setPrincipalId(String principalId) {
+		this.principalId = principalId;
+	}
+
+	public User(String name, String email, String principalId, String password, Role role_id) {
+		this.name = name;
+		this.email = email;
+		this.principalId = principalId;
+		this.password = password;
+		this.role_id = role_id;
+	}
+
+	public int getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	public String getPassword() {
 		return password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public User(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
+
+
+	public Role getRole_id() {
+		return role_id;
 	}
+
+	public void setRole_id(Role role_id) {
+		this.role_id = role_id;
+	}
+
+	@Override
+	public String toString() {
+		return "User{" +
+				"user_id=" + user_id +
+				", name='" + name + '\'' +
+				", email='" + email + '\'' +
+				", password='" + password + '\'' +
+				", role_id=" + role_id +
+				'}';
+	}
+
 	public User() {
 		super();
 	}
 
 }
+

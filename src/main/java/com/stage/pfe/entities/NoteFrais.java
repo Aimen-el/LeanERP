@@ -18,9 +18,6 @@ public class NoteFrais implements Serializable {
 	private String chemin;
 	private Boolean etat=true;	
 	private String motif;
-	@ManyToMany
-	@JoinTable(name="USER_UPLOAD")
-	private Collection<User> users;
 	public long getId() {
 		return id;
 	}
@@ -112,7 +109,6 @@ public class NoteFrais implements Serializable {
 		this.chemin = chemin;
 		this.etat = etat;
 		this.motif = motif;
-		this.users = users;
 	}
 
 	public NoteFrais(Boolean etat, String motif) {
@@ -128,11 +124,4 @@ public class NoteFrais implements Serializable {
 		this.username = username;
 	}
 
-	public Collection<User> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Collection<User> users) {
-		this.users = users;
-	}
 }

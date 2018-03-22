@@ -3,9 +3,60 @@
 <head>
     <meta charset="utf-8">
     <title>Google OAuth</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/app.css">
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript" >
+
+    'use strict';
+
+    // Creating angular Application with module name "GoogleOAuthMicroservice"
+    var app = angular.module('GoogleOAuth2Microservice',[]);
+
+    app.config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    }]);
+</script>
+<script type="text/javascript">
+    'use strict';
+
+    // Creating the Angular Controller
+    app.controller('AppCtrl', function ($http, $scope) {
+
+        // method for getting user details
+        var getUser = function () {
+            $http.get('/user').success(function (user) {
+                $scope.user = user;
+                console.log('Logged User : ', user);
+            }).error(function (error) {
+                $scope.resource = error;
+            });
+        };
+        getUser();
+
+        // method for logout
+        // var logout = function() {
+        //     $http.post("/logout", function() {
+        //         $scope("#user").html('');
+        //         $scope(".unauthenticated").show();
+        //         $scope(".authenticated").hide();
+        //     })
+        //     return true;
+        // }
+
+
+        $scope.logout = function () {
+            $http.post('/logout').success(function (res) {
+                $scope.user = null;
+            }).error(function (error) {
+                console.log("Logout error : ", error);
+            });
+        };
+    });
+
+
+</script>
 
 <body ng-app="GoogleOAuth2Microservice" ng-controller="AppCtrl" ng-cloak="">
 <div class="container" style="margin-top: 50px;">
@@ -24,7 +75,7 @@
         <!-- Home panel.It will visible after successfull login -->
         <div class="panel panel-default" ng-show="user">
             <div class="panel-heading">
-                <img class="p-img" alt="" ng-src="{{user.userAuthentication.details.picture}}"/> Name: {{user.name}}
+                <img class="p-img" alt="" ng-src="{{user.userAuthentication.details.picture}}"/> Name: {{user.userAuthentication.details.name}}
             </div>
             <div class="panel-body">
                 <div class="col-md-12">Email: {{user.userAuthentication.details.email}}</div>
@@ -36,7 +87,7 @@
                 </div>
                 <div class="col-md-12">
 
-                    <a href="#" class="btn btn-default margin-top-5"
+                    <a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080" class="btn btn-default margin-top-5"
                        ng-click="logout()"> Logout </a>
                 </div>
             </div>
@@ -47,9 +98,8 @@
 </div>
 
 <!-- Including Scripts -->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
-<script type="text/javascript" src="js/controller.js"></script>
+
+
 
 </body>
 </html>

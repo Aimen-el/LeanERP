@@ -3,29 +3,27 @@ package com.stage.pfe.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stage.pfe.dao.RoleRepository;
-import com.stage.pfe.dao.UserReository;
+import com.stage.pfe.dao.UserRepository;
 import com.stage.pfe.entities.Role;
 import com.stage.pfe.entities.User;
 @RestController
 public class UserService {
 	@Autowired
-	private UserReository userReository;
+	private UserRepository userRepository;
 	
 	@RequestMapping(value="/addUser")
 	public User save(User u) {
-		return userReository.save(u);
+		return userRepository.save(u);
 	}
 	//@Secured(value={"ROLE_ADMIN"})
-	@RequestMapping(value="/findUsers")
-	public List<User> findAll(){
-		return userReository.findAll();
-		}
+//	@RequestMapping(value="/findUsers")
+//	public List<User> findAll(){
+//		return userRepository.findAll();
+//		}
 	
 	@Autowired
 	private RoleRepository roleRepository;	
@@ -39,9 +37,9 @@ public class UserService {
 		return roleRepository.findAll();
 		}
 	@RequestMapping(value="/addRoleToUser")
-	public User addRoleToUser(String username, String role) {
-		User u= userReository.findOne(username);
-		userReository.save(u);
+	public User addRoleToUser(int userId, String role) {
+		User u= userRepository.findOne(userId);
+		userRepository.save(u);
 		return u;
 		
 		

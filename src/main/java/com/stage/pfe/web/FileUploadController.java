@@ -6,23 +6,18 @@ import java.io.File;
 import java.io.IOException;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.stage.pfe.dao.UploadRepository;
-import com.stage.pfe.dao.UserReository;
+import com.stage.pfe.dao.UserRepository;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.Resource;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +25,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -56,7 +52,7 @@ public class FileUploadController {
     @Autowired
     private UploadRepository uploadRepository;
     @Autowired
-    private UserReository userReository;
+    private UserRepository userRepository;
     private final StorageService storageService;
 
     @Autowired
@@ -71,11 +67,13 @@ public class FileUploadController {
     }
 
     @GetMapping("/editDocument")
-    public String listFiles(Model model, Authentication authentication) throws IOException {
+    public String listFiles(Model model,OAuth2Authentication authentication) throws IOException {
         List<NoteFrais> noteFrais = null;
         //UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        LinkedHashMap<String, String> details = (LinkedHashMap<String, String>)authentication.getUserAuthentication().getDetails();
+
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+
         boolean authorized = authorities.contains(new SimpleGrantedAuthority("ADMIN"));
 
         if (authorized) {
@@ -83,7 +81,7 @@ public class FileUploadController {
             model.addAttribute("notefrais", noteFrais);
 
         } else {
-            noteFrais = uploadRepository.findAllByUsername(auth.getName());
+            noteFrais = uploadRepository.findAllByUsername(details.get("name"));
 
             model.addAttribute("notefrais", noteFrais);
         }
@@ -138,10 +136,10 @@ public class FileUploadController {
 
     @PostMapping("/uploadForm")
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
-                                   RedirectAttributes redirectAttributes, HttpServletRequest request, Model model, Boolean etat, String motif) {
+                                   RedirectAttributes redirectAttributes, OAuth2Authentication authentication,HttpServletRequest request, Model model, Boolean etat, String motif) {
 
         storageService.store(file);
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        LinkedHashMap<String, String> details = (LinkedHashMap<String, String>)authentication.getUserAuthentication().getDetails();
 
         // Chemin Local
         String absolutePath = new File("upload-dir/" + file.getOriginalFilename()).getAbsolutePath();
@@ -150,7 +148,7 @@ public class FileUploadController {
         NoteFrais noteFrais = new NoteFrais(etat, motif);
         noteFrais.setDateupload(date);
         noteFrais.setName(file.getOriginalFilename());
-        noteFrais.setusername(auth.getName());
+        noteFrais.setusername(details.get("name"));
 
         noteFrais.setChemin(absolutePath);
 

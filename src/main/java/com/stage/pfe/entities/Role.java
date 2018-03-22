@@ -9,36 +9,29 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="user_roles")
-public class Role implements Serializable{
+public class Role implements Serializable {
 	@Id
-	private int user_role_id;
-	@ManyToOne(cascade= {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH,CascadeType.REFRESH})
-	@JoinColumn(name = "username")
-	private User username ;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int role_id;
+	private String role;
 
-
-	public Role(int user_role_id, User username) {
-		this.user_role_id = user_role_id;
-		this.username = username;
-	}
-
-	public User getUsername() {
-		return username;
-	}
-
-	public void setUsername(User username) {
-		this.username = username;
-	}
 
 	public Role() {
 	}
 
-	public int getUser_role_id() {
-		return user_role_id;
+	public int getRole_id() {
+		return role_id;
 	}
 
-	public void setUser_role_id(int user_role_id) {
-		this.user_role_id = user_role_id;
+	public void setRole_id(int role_id) {
+		this.role_id = role_id;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 }
