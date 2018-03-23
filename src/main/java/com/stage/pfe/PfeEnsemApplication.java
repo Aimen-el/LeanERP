@@ -12,21 +12,22 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.stage.pfe.storage.StorageService;
 import com.stage.pfe.storage.StorageProperties;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
+@SpringBootApplication
 @EnableConfigurationProperties(StorageProperties.class)
 @EnableJpaRepositories(basePackages="com.stage.pfe.dao")
-@SpringBootApplication
+public class PfeEnsemApplication {
 
-public class PfeEnsemApplication extends SpringBootServletInitializer {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(PfeEnsemApplication.class);
-    }
-
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         SpringApplication.run(PfeEnsemApplication.class, args);
     }
 
 
+    @Bean
+    CommandLineRunner init(StorageService storageService) {
+        return (args) -> {
+            storageService.init();
+        };
+    }
 }
