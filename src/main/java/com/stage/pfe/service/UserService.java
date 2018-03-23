@@ -37,8 +37,8 @@ public class UserService {
 		return roleRepository.findAll();
 		}
 	@RequestMapping(value="/addRoleToUser")
-	public User addRoleToUser(int userId, String role) {
-		User u= userRepository.findOne(userId);
+	public User addRoleToUser(String principalId, String role) {
+		User u= userRepository.findOne(principalId);
 		userRepository.save(u);
 		return u;
 		

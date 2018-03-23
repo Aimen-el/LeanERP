@@ -1,5 +1,6 @@
 package com.stage.pfe;
 
+import com.stage.pfe.dao.RoleRepository;
 import com.stage.pfe.dao.UserRepository;
 import com.stage.pfe.entities.Role;
 import com.stage.pfe.entities.User;
@@ -40,9 +41,7 @@ import org.springframework.web.client.RestOperations;
 
 import java.net.URI;
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Modifying or overriding the default spring boot security.
@@ -150,24 +149,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 		return oAuth2Filter;
 	}
-	@Bean
-	public PrincipalExtractor principalExtractor(UserRepository userRepository) {
-		return map -> {
-
-			String principalId = (String) map.get("sub");
-			User user = userRepository.findByPrincipalId(principalId);
-			if (user == null) {
-				user = new User();
-				user.setPrincipalId(principalId);
-				user.setEmail((String) map.get("email"));
-				user.setName((String) map.get("name"));
-				user.setPhoto((String) map.get("picture"));
-			}
-			userRepository.save(user);
-			return user;
-		};
-	}
-
 	@Bean
 	public OAuth2RestOperations template (){return new OAuth2RestOperations() {
 		@Override
@@ -395,13 +376,59 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public AuthoritiesExtractor authoritiesExtractor(UserRepository userRepository) {
 		return map -> {
 			String url = (String) map.get("hd");
-			if(url != null) {	if (url.equals("leanovia.com")) {
-									return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
-																}
-									throw new BadCredentialsException("Not in Leanovia Team");
-								}
-			throw new BadCredentialsException("Not in Leanovia Team");
+			if (url != null) {
+				if (url.equals("leanovia.com")) {
+					return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+				}
+					throw new BadCredentialsException("Not in Leanovia Team");
+				}
+				throw new BadCredentialsException("Not in Leanovia Team");
+			};
+	}
 
+	@Autowired
+	RoleRepository roleRepository;
+	@Bean
+	public PrincipalExtractor principalExtractor(UserRepository userRepository) {
+		return map -> {
+
+			String url = (String) map.get("hd");
+			if(url != null) {	if (url.equals("leanovia.com")) {
+				//return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+				String principalId = (String) map.get("sub");
+				User user = userRepository.findByPrincipalId(principalId);
+				Role defaultRole =roleRepository.findByRole("CONSULTANT");
+
+				if (user == null) {
+					user = new User();
+					user.setPrincipalId(principalId);
+					user.setEmail((String) map.get("email"));
+					user.setName((String) map.get("name"));
+					user.setPhoto((String) map.get("picture"));
+					user.setRoles(defaultRole);
+				}
+				userRepository.save(user);
+				return user;
+			}
+				throw new BadCredentialsException("Not in Leanovia Team");
+			}
+			throw new BadCredentialsException("Not in Leanovia Team");
 		};
 	}
+
+
+//	@Autowired
+//	UserRepository userRepository;
+//	@Bean
+//	public AuthoritiesExtractor extractAuthorities(UserRepository userRepository) {
+//		return map -> {
+//		String principalId = (String) map.get("sub");
+//		User user = userRepository.findByPrincipalId(principalId);
+//		if (user == null) {
+//			return Collections.<GrantedAuthority> emptyList();
+//		}
+//		return AuthorityUtils.createAuthorityList(user.getRoles().stream().toArray(size -> new String[size]));
+//
+//	};
+//	}
 }

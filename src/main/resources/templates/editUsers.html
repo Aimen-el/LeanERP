@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/app.css"/>
+<head></head>
+<body>
+	<div>
+		<a style="color: blue" th:href="@{/logout}">logout</a>
+	</div>
+<div>
+    <table  class="table" id="myTableId" dt:table="true">
+        <thead>
+        <tr>
+            <th>Nom d'utilisateur</th>
+            <th>Email</th>
+            <th>Role</th>
+        </tr>
+        </thead>
+        <div class=" col-md-4 col-md-offset-4">
+
+        <tbody>
+        <tr  th:each="user, stat : ${users}">
+        	<td th:text="${user.getName()}" ></td>
+            <td th:text="${user.getEmail()}" ></td>
+            <td th:text="${user.getRoles().getRole()}"></td>
+
+            <td>
+            </td>
+        </tr>
+        </tbody>
+            </div>
+
+    </table>
+</div>
+</body>
+</html>

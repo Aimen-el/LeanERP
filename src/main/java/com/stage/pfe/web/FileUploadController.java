@@ -75,7 +75,7 @@ public class FileUploadController {
 
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         currentUser=userRepository.findByPrincipalId(details.get(("sub")));
-        boolean authorized = currentUser.getROLE().contains("ADMIN");
+        boolean authorized = currentUser.getRoles().getRole().equals("ADMIN");
 
         if (authorized) {
             noteFrais = uploadRepository.findAll();
