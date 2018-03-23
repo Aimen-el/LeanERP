@@ -7,6 +7,7 @@ import com.stage.pfe.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.AuthoritiesExtractor;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.PrincipalExtractor;
@@ -47,6 +48,7 @@ import java.util.*;
  * Modifying or overriding the default spring boot security.
  */
 @Configuration
+@EnableAutoConfiguration
 @EnableWebSecurity
 @EnableOAuth2Sso
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

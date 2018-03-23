@@ -20,5 +20,9 @@ public class UserController {
     public Principal user(Principal user) {
         return user;
     }
+    @RequestMapping("/unauthenticated")
+    public String unauthenticated() {
+        return "redirect:/?error=true";
+    }
 }
 
