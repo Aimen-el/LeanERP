@@ -1,0 +1,122 @@
+
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:dt="http://java.sun.com/xml/ns/persistence/orm">
+<head>
+    <meta charset="utf-8" />
+    <title>Google OAuth</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+    <base href="/google/login" />
+
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript" >
+
+    'use strict';
+
+    // Creating angular Application with module name "GoogleOAuthMicroservice"
+    var app = angular.module('GoogleOAuth2Microservice',[]);
+
+    app.config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    }]);
+</script>
+<script type="text/javascript">
+    'use strict';
+
+    // Creating the Angular Controller
+    app.controller('AppCtrl', function ($http, $scope) {
+
+        // method for getting user details
+        var getUser = function () {
+            $http.get('/user').success(function (user) {
+                $scope.user = user;
+                console.log('Logged User : ', user);
+            }).error(function (error) {
+                $scope.resource = error;
+            });
+        };
+        getUser();
+
+        $scope.logout = function () {
+            $http.post('/logout').success(function (res) {
+                $scope.user = null;
+            }).error(function (error) {
+                console.log("Logout error : ", error);
+            });
+        };
+    });
+
+
+</script>
+
+<body ng-app="GoogleOAuth2Microservice" ng-controller="AppCtrl" ng-cloak="">
+<div class="container" style="margin-top: 50px;">
+    <!-- Login panel -->
+    <div align="left" class="panel-heading">
+        <a href="/editUsers" class="btn btn-default margin-top-5" > liste des consultants</a>
+    </div>
+    <!-- End Login panel -->
+    
+
+    <!-- Home panel.It will visible after successfull login -->
+    <div class="panel panel-default" ng-show="user">
+        
+	
+    <table  class="table" id="myTableId" dt:table="true">
+        <thead>
+        <tr>
+            <th colspan="2">Information du consultant</th>
+            <th>Performance du consultant</th>
+            
+        </tr>
+        </thead>
+        <div class="panel-body" >
+        	<tr  th:each="user, stat : ${user}">
+                <td> Nom:</td>
+                <td th:text="${user.getName()}" ></td>
+                <td> A definir</td>
+                
+            </tr>
+            <tr  th:each="user, stat : ${user}">
+                <td> Solde de conges:</td>
+                <td th:text="${user.getSoldeConges()}" ></td>
+                
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Jour de recup:</td>
+                <td th:text="${user.getJourDeRecup()}" ></td>
+                
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Mission en cours:</td>
+                <td th:text="${user.getMission()}" ></td>
+                
+                
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Certification obtenus:</td>
+                <td th:text="${user.getCertificationObtenues()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Certification en cours:</td>
+                <td th:text="${user.getCertificationEnCours()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Livre empuntes:</td>
+                <td th:text="${user.getLivre()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Note de frais en cours:</td>
+                <td th:text="${user.getNoteFrais()}" ></td>
+            </tr>
+        </div>
+
+    </table> 
+    		
+    </div>
+</div>
+
+</body>
+</html>
