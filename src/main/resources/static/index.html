@@ -55,84 +55,82 @@
 
     <!-- End Login panel -->
 
-        <!-- Home panel.It will visible after successfull login -->
-        <div class="panel panel-default" ng-show="user">
-            <div class="panel-heading">
-                <img class="p-img" alt="" ng-src="{{user.userAuthentication.details.picture}}"/> Name: {{user.userAuthentication.details.name}}
-            </div>
-            <div class="panel-body">
-                <div class="col-md-12">Email: {{user.userAuthentication.details.email}}</div>
-                <table  class="table" id="myTableId" dt:table="true">
-                    <thead>
-                    <tr>
-                        <th colspan="2">Information du consultant</th>
-                        <th>Performance du consultant</th>
-                        <th>Liens utiles</th>
+    <!-- Home panel.It will visible after successfull login -->
+    <div class="panel panel-default" ng-show="user">
+        <div class="panel-heading">
+            <img class="p-img" alt="" ng-src="{{user.userAuthentication.details.picture}}"/> Name: {{user.userAuthentication.details.name}}
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">Email: {{user.userAuthentication.details.email}}</div>
+            <table  class="table" id="myTableId" dt:table="true">
+                <thead>
+                <tr>
+                    <th colspan="2">Information du consultant</th>
+                    <th>Performance du consultant</th>
+                    <th>Liens utiles</th>
+                </tr>
+                </thead>
+                <div class="panel-body" >
+                    <tr  th:each="user, stat : ${currentUser}">
+                        <td> Solde de conges:</td>
+                        <td  >{{user.userAuthentication.principal.soldeConges}}</td>
+                        <td> A definir</td>
+                        <td>
+                            <a href="https://leanovia.net/accueil/timetracker">Time Tracker</a>
+                        </td>
                     </tr>
-                    </thead>
-                    <div class="panel-body" >
-                        <tr  th:each="user, stat : ${currentUser}">
-                            <td> Solde de conges:</td>
-                            <td  >{{user.userAuthentication.principal.soldeConges}}</td>
-                            <td> A definir</td>
-                            <td>
-                                <a href="https://leanovia.net/accueil/timetracker">Time Tracker</a>
-                            </td>
-                        </tr>
-                        <tr th:each="user, stat : ${user}">
-                            <td> Jour de recup:</td>
-                            <td  >{{user.userAuthentication.principal.jourDeRecup}}</td>
-                            <td></td>
-                            <td>
-                                <a href="https://leanovia.net/accueil/bibliotech/livres">Bibleotheque</a>
-                            </td>
-                        </tr>
-                        <tr >
-                            <td> Mission en cours:</td>
-                            <td>{{user.userAuthentication.principal.mission}}</td>
-                            <td></td>
-                            <td>
-                                <a href="/uploadForm">Note de frais</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td> Certification obtenus:</td>
-                            <td >{{user.userAuthentication.principal.certificationObtenues}}</td>
-                        </tr>
-                        <tr>
-                            <td> Certification en cours:</td>
-                            <td>{{user.userAuthentication.principal.certificationEnCours}}</td>
-                        </tr>
-                        <tr >
-                            <td> Livre empuntes:</td>
-                            <td>{{user.userAuthentication.principal.livre}}</td>
-                        </tr>
-                        <tr>
-                            <td> Note de frais en cours:</td>
-                            <td>{{user.userAuthentication.principal.noteFrais}}</td>
-                        </tr>
-                    </div>
+                    <tr th:each="user, stat : ${user}">
+                        <td> Jour de recup:</td>
+                        <td  >{{user.userAuthentication.principal.jourDeRecup}}</td>
+                        <td></td>
+                        <td>
+                            <a href="https://leanovia.net/accueil/bibliotech/livres">Bibleotheque</a>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td> Mission en cours:</td>
+                        <td>{{user.userAuthentication.principal.mission}}</td>
+                        <td></td>
+                        <td>
+                            <a href="/uploadForm">Note de frais</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Certification obtenus:</td>
+                        <td >{{user.userAuthentication.principal.certificationObtenues}}</td>
+                    </tr>
+                    <tr>
+                        <td> Certification en cours:</td>
+                        <td>{{user.userAuthentication.principal.certificationEnCours}}</td>
+                    </tr>
+                    <tr >
+                        <td> Livre empuntes:</td>
+                        <td>{{user.userAuthentication.principal.livre}}</td>
+                    </tr>
+                    <tr>
+                        <td> Note de frais en cours:</td>
+                        <td>{{user.userAuthentication.principal.noteFrais}}</td>
+                    </tr>
+                </div>
 
-                </table>
-                <div class="col-md-12">
-                    <a href="/uploadForm">Upload file</a>
-                </div>
-                <div class="col-md-12">
-                    <a href="/editDocument">Manage Documents</a>
-                </div>
-                <div class="col-md-12">
-                    <a href="/editUsers">Manage Users</a>
-                </div>
-                <div class="col-md-12">
+            </table>
+           
+            <div class="col-md-12">
+                <a href="/editDocument">Manage Documents</a>
+            </div>
+            <div class="col-md-12">
+                <a href="/editUsers">Manage Users</a>
+            </div>
+            <div class="col-md-12">
 
-                    <a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080" class="btn btn-default margin-top-5"
-                       ng-click="logout()"> Logout </a>
-                </div>
+                <a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080" class="btn btn-default margin-top-5"
+                   ng-click="logout()"> Logout </a>
             </div>
         </div>
-        <!-- End Home Panel -->
-
     </div>
+    <!-- End Home Panel -->
+
+</div>
 </div>
 
 <!-- Including Scripts -->
