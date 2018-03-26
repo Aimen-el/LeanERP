@@ -71,45 +71,45 @@
                     </tr>
                     </thead>
                     <div class="panel-body" >
-                        <tr  th:each="user, stat : ${users}">
+                        <tr  th:each="user, stat : ${currentUser}">
                             <td> Solde de conges:</td>
-                            <td th:text="${user.getSoldeConges()}" ></td>
+                            <td  >{{user.userAuthentication.principal.soldeConges}}</td>
                             <td> A definir</td>
                             <td>
                                 <a href="https://leanovia.net/accueil/timetracker">Time Tracker</a>
                             </td>
                         </tr>
-                        <tr th:each="user, stat : ${users}">
+                        <tr th:each="user, stat : ${user}">
                             <td> Jour de recup:</td>
-                            <td th:text="${user.getJourDeRecup()}" ></td>
+                            <td  >{{user.userAuthentication.principal.jourDeRecup}}</td>
                             <td></td>
                             <td>
                                 <a href="https://leanovia.net/accueil/bibliotech/livres">Bibleotheque</a>
                             </td>
                         </tr>
-                        <tr th:each="user, stat : ${users}">
+                        <tr >
                             <td> Mission en cours:</td>
-                            <td th:text="${user.getMission()}" ></td>
+                            <td>{{user.userAuthentication.principal.mission}}</td>
                             <td></td>
                             <td>
                                 <a href="/uploadForm">Note de frais</a>
                             </td>
                         </tr>
-                        <tr th:each="user, stat : ${users}">
+                        <tr>
                             <td> Certification obtenus:</td>
-                            <td th:text="${user.getCertificationObtenues()}" ></td>
+                            <td >{{user.userAuthentication.principal.certificationObtenues}}</td>
                         </tr>
-                        <tr th:each="user, stat : ${users}">
+                        <tr>
                             <td> Certification en cours:</td>
-                            <td th:text="${user.getCertificationEnCours()}" ></td>
+                            <td>{{user.userAuthentication.principal.certificationEnCours}}</td>
                         </tr>
-                        <tr th:each="user, stat : ${users}">
+                        <tr >
                             <td> Livre empuntes:</td>
-                            <td th:text="${user.getLivre()}" ></td>
+                            <td>{{user.userAuthentication.principal.livre}}</td>
                         </tr>
-                        <tr th:each="user, stat : ${users}">
+                        <tr>
                             <td> Note de frais en cours:</td>
-                            <td th:text="${user.getNoteFrais()}" ></td>
+                            <td>{{user.userAuthentication.principal.noteFrais}}</td>
                         </tr>
                     </div>
 
