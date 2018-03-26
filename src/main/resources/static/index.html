@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:dt="http://java.sun.com/xml/ns/persistence/orm">
 <head>
     <meta charset="utf-8">
     <title>Google OAuth</title>
@@ -62,6 +62,58 @@
             </div>
             <div class="panel-body">
                 <div class="col-md-12">Email: {{user.userAuthentication.details.email}}</div>
+                <table  class="table" id="myTableId" dt:table="true">
+                    <thead>
+                    <tr>
+                        <th colspan="2">Information du consultant</th>
+                        <th>Performance du consultant</th>
+                        <th>Liens utiles</th>
+                    </tr>
+                    </thead>
+                    <div class="panel-body" >
+                        <tr  th:each="user, stat : ${users}">
+                            <td> Solde de conges:</td>
+                            <td th:text="${user.getSoldeConges()}" ></td>
+                            <td> A definir</td>
+                            <td>
+                                <a href="https://leanovia.net/accueil/timetracker">Time Tracker</a>
+                            </td>
+                        </tr>
+                        <tr th:each="user, stat : ${users}">
+                            <td> Jour de recup:</td>
+                            <td th:text="${user.getJourDeRecup()}" ></td>
+                            <td></td>
+                            <td>
+                                <a href="https://leanovia.net/accueil/bibliotech/livres">Bibleotheque</a>
+                            </td>
+                        </tr>
+                        <tr th:each="user, stat : ${users}">
+                            <td> Mission en cours:</td>
+                            <td th:text="${user.getMission()}" ></td>
+                            <td></td>
+                            <td>
+                                <a href="/uploadForm">Note de frais</a>
+                            </td>
+                        </tr>
+                        <tr th:each="user, stat : ${users}">
+                            <td> Certification obtenus:</td>
+                            <td th:text="${user.getCertificationObtenues()}" ></td>
+                        </tr>
+                        <tr th:each="user, stat : ${users}">
+                            <td> Certification en cours:</td>
+                            <td th:text="${user.getCertificationEnCours()}" ></td>
+                        </tr>
+                        <tr th:each="user, stat : ${users}">
+                            <td> Livre empuntes:</td>
+                            <td th:text="${user.getLivre()}" ></td>
+                        </tr>
+                        <tr th:each="user, stat : ${users}">
+                            <td> Note de frais en cours:</td>
+                            <td th:text="${user.getNoteFrais()}" ></td>
+                        </tr>
+                    </div>
+
+                </table>
                 <div class="col-md-12">
                     <a href="/uploadForm">Upload file</a>
                 </div>
@@ -70,9 +122,6 @@
                 </div>
                 <div class="col-md-12">
                     <a href="/editUsers">Manage Users</a>
-                </div>
-                <div class="col-md-12">
-                    <a href="https://leanovia.net/accueil/timetracker">Time Tracker</a>
                 </div>
                 <div class="col-md-12">
 
