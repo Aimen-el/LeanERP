@@ -43,19 +43,12 @@ public class AdminController {
         return "editUsers";
     }
     
-    @RequestMapping(value = "/consulter/{id}", method = RequestMethod.GET)
-    public String consulter(@PathVariable String id, User user,Model model) {
-        user=userRepository.findByPrincipalId(id);
-        model.addAttribute("user",user);
+     @RequestMapping(value = "/consulter/{id}", method = RequestMethod.GET)
+    public String consulter(@PathVariable String id, Model model) {
+        model.addAttribute("user", this.userRepository.findByPrincipalId(id));
         return "consulter";
     }
-    
-    /* @RequestMapping(value = "/consulter/{name}", method = RequestMethod.GET)
-    public String edit(@PathVariable("name") String name, ModelMap model) {
-        model.addAttribute("user", this.userRepository.findAllByName(name));
-        return "consulter";
-    }
-*/
+
 }
    
 
