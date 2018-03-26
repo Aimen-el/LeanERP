@@ -9,11 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -43,4 +42,21 @@ public class AdminController {
         }
         return "editUsers";
     }
+    
+    @RequestMapping(value = "/consulter/{id}", method = RequestMethod.GET)
+    public String consulter(@PathVariable String id, User user,Model model) {
+        user=userRepository.findByPrincipalId(id);
+        model.addAttribute("user",user);
+        return "consulter";
+    }
+    
+    /* @RequestMapping(value = "/consulter/{name}", method = RequestMethod.GET)
+    public String edit(@PathVariable("name") String name, ModelMap model) {
+        model.addAttribute("user", this.userRepository.findAllByName(name));
+        return "consulter";
+    }
+*/
 }
+   
+
+
