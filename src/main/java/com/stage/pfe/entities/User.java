@@ -20,9 +20,102 @@ public class User implements Serializable {
 	private String principalId;
 	private String photo;
 	private String password;
+	private long telephone;
+	private long soldeConges;
+	private long jourDeRecup;
+	private String mission;
+	private String CertificationObtenues;
+	private String CertificationEnCours;
+	private int livre;
+	private int noteFrais;
+
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	private Role roles;
+	
+	public User(String name, String email, String principalId, String photo, String password, long telephone,
+			long soldeConges, long jourDeRecup, String mission, String certificationObtenues,
+			String certificationEnCours, int livre, int noteFrais, Role roles) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.principalId = principalId;
+		this.photo = photo;
+		this.password = password;
+		this.telephone = telephone;
+		this.soldeConges = soldeConges;
+		this.jourDeRecup = jourDeRecup;
+		this.mission = mission;
+		CertificationObtenues = certificationObtenues;
+		CertificationEnCours = certificationEnCours;
+		this.livre = livre;
+		this.noteFrais = noteFrais;
+		this.roles = roles;
+	}
+
+	public long getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(long telephone) {
+		this.telephone = telephone;
+	}
+
+	public long getSoldeConges() {
+		return soldeConges;
+	}
+
+	public void setSoldeConges(long soldeConges) {
+		this.soldeConges = soldeConges;
+	}
+
+	public long getJourDeRecup() {
+		return jourDeRecup;
+	}
+
+	public void setJourDeRecup(long jourDeRecup) {
+		this.jourDeRecup = jourDeRecup;
+	}
+
+	public String getMission() {
+		return mission;
+	}
+
+	public void setMission(String mission) {
+		this.mission = mission;
+	}
+
+	public String getCertificationObtenues() {
+		return CertificationObtenues;
+	}
+
+	public void setCertificationObtenues(String certificationObtenues) {
+		CertificationObtenues = certificationObtenues;
+	}
+
+	public String getCertificationEnCours() {
+		return CertificationEnCours;
+	}
+
+	public void setCertificationEnCours(String certificationEnCours) {
+		CertificationEnCours = certificationEnCours;
+	}
+
+	public int getLivre() {
+		return livre;
+	}
+
+	public void setLivre(int livre) {
+		this.livre = livre;
+	}
+
+	public int getNoteFrais() {
+		return noteFrais;
+	}
+
+	public void setNoteFrais(int noteFrais) {
+		this.noteFrais = noteFrais;
+	}
 
 	public Role getRoles() {
 		return roles;
@@ -103,4 +196,3 @@ public class User implements Serializable {
 	}
 
 }
-
