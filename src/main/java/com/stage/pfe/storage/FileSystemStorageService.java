@@ -24,7 +24,7 @@ public class FileSystemStorageService implements StorageService {
 
     @Autowired
     public FileSystemStorageService(StorageProperties properties) {
-        this.rootLocation = Paths.get("");
+        this.rootLocation = Paths.get(properties.getLocation());
     }
 
     @Override
@@ -32,7 +32,7 @@ public class FileSystemStorageService implements StorageService {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + filename);
+                throw new StorageException("Failed to sto    re empty file " + filename);
             }
             if (filename.contains("..")) {
                 // This is a security check
