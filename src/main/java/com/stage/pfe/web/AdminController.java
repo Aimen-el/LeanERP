@@ -9,11 +9,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.security.Principal;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -42,5 +41,11 @@ public class AdminController {
             model.addAttribute("users", users);
         }
         return "editUsers";
+    }
+    @RequestMapping("/UsersDashboard/{id}")
+    public String userDashboard(@PathVariable String id, User user,Model model) {
+        user=userRepository.findByPrincipalId(id);
+        model.addAttribute("user",user);
+        return "/UsersDashboard";
     }
 }

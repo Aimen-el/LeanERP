@@ -17,16 +17,16 @@
             <th>Role</th>
         </tr>
         </thead>
-        <div class=" col-md-4 col-md-offset-4">
-        <tr  th:each="user, stat : ${users}">
-        	<td th:text="${user.getName()}" ></td>
-            <td th:text="${user.getEmail()}" ></td>
-            <td th:text="${user.getRoles().getRole()}"></td>
-
-            <td>
-            </td>
-        </tr>
+        <tbody>
+            <div class=" col-md-4 col-md-offset-4">
+              <tr  th:each="user, stat : ${users}">
+                <td th:text="${user.getName()}" ></td>
+                <td th:text="${user.getEmail()}" ></td>
+                <td th:text="${user.getRoles().getRole()}"></td>
+                <td><a th:href="@{/UsersDashboard/{id}(id=${user.getPrincipalId()})}" class="btn btn-primary btn-xs">Dashboard</a></td>
+             </tr>
             </div>
+        </tbody>
 
     </table>
 </div>
