@@ -27,16 +27,19 @@ public class AdminController {
     @GetMapping("/editUsers")
 
     public String listUsers(Model model, User currentUser, OAuth2Authentication authentication) throws IOException {
+        List<User> users=null;
         //UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         LinkedHashMap<String, String> details = (LinkedHashMap<String, String>)authentication.getUserAuthentication().getDetails();
         currentUser=userRepository.findByPrincipalId(details.get(("sub")));
         boolean authorized = currentUser.getRoles().getRole().equals("ADMIN");
 
         if (authorized) {
-            List<User> users=null;
             users=userRepository.findAll();
              model.addAttribute("users", users);
-
+        }
+        else {
+        	users=userRepository.findAllByName(details.get("name"));
+            model.addAttribute("users", users);
         }
         return "editUsers";
     }
