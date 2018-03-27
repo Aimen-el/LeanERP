@@ -57,64 +57,48 @@
     <div align="left" class="panel-heading">
         <a href="/editUsers" class="btn btn-default margin-top-5" > liste des consultants</a>
     </div>
-    <!-- End Login panel -->
-    
+    <div class="panel panel-default">
+    <div align="center" class="panel panel-heading" >
+        <img class="p-img" th:attr="src=@{${user.getPhoto()}}"/>
+        <div th:text="${user.getName()}" ></div>
+    </div>
 
-    <!-- Home panel.It will visible after successfull login -->
-    <div class="panel panel-default" ng-show="user">
-        
-	
-    <table  class="table" id="myTableId" dt:table="true">
-        <thead>
-        <tr>
-            <th colspan="2">Information du consultant</th>
-            <th>Performance du consultant</th>
-            
-        </tr>
-        </thead>
-        <div class="panel-body" >
-        	<tr  th:each="user, stat : ${user}">
-                <td> Nom:</td>
-                <td th:text="${user.getName()}" ></td>
-                <td> A definir</td>
-                
-            </tr>
-            <tr  th:each="user, stat : ${user}">
-                <td> Solde de conges:</td>
-                <td th:text="${user.getSoldeConges()}" ></td>
-                
-            </tr>
-            <tr th:each="user, stat : ${user}">
-                <td> Jour de recup:</td>
-                <td th:text="${user.getJourDeRecup()}" ></td>
-                
-            </tr>
-            <tr th:each="user, stat : ${user}">
-                <td> Mission en cours:</td>
-                <td th:text="${user.getMission()}" ></td>
-                
-                
-            </tr>
-            <tr th:each="user, stat : ${user}">
-                <td> Certification obtenus:</td>
-                <td th:text="${user.getCertificationObtenues()}" ></td>
-            </tr>
-            <tr th:each="user, stat : ${user}">
-                <td> Certification en cours:</td>
-                <td th:text="${user.getCertificationEnCours()}" ></td>
-            </tr>
-            <tr th:each="user, stat : ${user}">
-                <td> Livre empuntes:</td>
-                <td th:text="${user.getLivre()}" ></td>
-            </tr>
-            <tr th:each="user, stat : ${user}">
-                <td> Note de frais en cours:</td>
-                <td th:text="${user.getNoteFrais()}" ></td>
-            </tr>
-        </div>
+    <div>
+        <table  class="table" id="myTableId" dt:table="true">
 
-    </table> 
-    		
+            <div>
+                <tr  th:each="user, stat : ${user}">
+                    <td> Solde de conges:</td>
+                    <td th:text="${user.getSoldeConges()}" ></td>
+
+                </tr>
+                <tr th:each="user, stat : ${user}">
+                    <td> Jour de recup:</td>
+                    <td th:text="${user.getJourDeRecup()}" ></td>
+                </tr>
+                <tr th:each="user, stat : ${user}">
+                    <td> Mission en cours:</td>
+                    <td th:text="${user.getMission()}" ></td>
+                </tr>
+                <tr th:each="user, stat : ${user}">
+                    <td> Certification obtenus:</td>
+                    <td th:text="${user.getCertificationObtenues()}" ></td>
+                </tr>
+                <tr th:each="user, stat : ${user}">
+                    <td> Certification en cours:</td>
+                    <td th:text="${user.getCertificationEnCours()}" ></td>
+                </tr>
+                <tr th:each="user, stat : ${user}">
+                    <td> Livre empuntes:</td>
+                    <td th:text="${user.getLivre()}" ></td>
+                </tr>
+                <tr th:each="user, stat : ${user}">
+                    <td> Note de frais en cours:</td>
+                    <td th:text="${user.getNoteFrais()}" ></td>
+                </tr>
+            </div>
+        </table>
+    </div>
     </div>
 </div>
 
