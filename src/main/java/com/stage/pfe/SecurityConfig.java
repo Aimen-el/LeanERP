@@ -374,19 +374,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		}
 	};}
 
-	@Bean
-	public AuthoritiesExtractor authoritiesExtractor(UserRepository userRepository) {
-		return map -> {
-			String url = (String) map.get("hd");
-			if (url != null) {
-				if (url.equals("leanovia.com")) {
-					return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
-				}
-					throw new BadCredentialsException("Not in Leanovia Team");
-				}
-				throw new BadCredentialsException("Not in Leanovia Team");
-			};
-	}
+//	@Bean
+//	public AuthoritiesExtractor authoritiesExtractor(UserRepository userRepository) {
+//		return map -> {
+//			String url = (String) map.get("hd");
+//			if (url != null) {
+//				if (url.equals("leanovia.com")) {
+//					return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+//				}
+//					throw new BadCredentialsException("Not in Leanovia Team");
+//				}
+//				throw new BadCredentialsException("Not in Leanovia Team");
+//			};
+//	}
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -395,7 +395,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return map -> {
 
 			String url = (String) map.get("hd");
-			if(url != null) {	if (url.equals("leanovia.com")) {
+		//	if(url != null) {	if (url.equals("leanovia.com")) {
 				//return AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
 				String principalId = (String) map.get("sub");
 				User user = userRepository.findByPrincipalId(principalId);
@@ -411,10 +411,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				}
 				userRepository.save(user);
 				return user;
-			}
-				throw new BadCredentialsException("Not in Leanovia Team");
-			}
-			throw new BadCredentialsException("Not in Leanovia Team");
+		//	}
+		//		throw new BadCredentialsException("Not in Leanovia Team");
+		//	}
+		//	throw new BadCredentialsException("Not in Leanovia Team");
 		};
 	}
 
