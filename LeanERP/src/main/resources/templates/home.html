@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<title>Espace de gestion des notes de frais</title>
+</head>
+<body>
+	<h1>Bienvenue  <span th:text="${user.getName()}"/> à la page d'acceuil!</h1>
+
+	<a style="color: blue" th:href="@{/uploadForm}">Upload file</a>
+	<br />
+	<a style="color: blue" th:href="@{/editDocument}">Manage Documents</a>
+	<br/>
+	<a style="color: blue" th:href="@{/logout}">Logout</a>
+
+
+</body>
+</html>

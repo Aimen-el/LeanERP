@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:dt="http://java.sun.com/xml/ns/persistence/orm">
+<head>
+    <meta charset="utf-8">
+    <title>Google OAuth</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/app.css">
+    <base href="/google/login" />
+
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script type="text/javascript" >
+
+    'use strict';
+
+    // Creating angular Application with module name "GoogleOAuthMicroservice"
+    var app = angular.module('GoogleOAuth2Microservice',[]);
+
+    app.config(['$httpProvider', function ($httpProvider) {
+        $httpProvider.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    }]);
+</script>
+<script type="text/javascript">
+    'use strict';
+
+    // Creating the Angular Controller
+    app.controller('AppCtrl', function ($http, $scope) {
+
+        // method for getting user details
+        var getUser = function () {
+            $http.get('/user').success(function (user) {
+                $scope.user = user;
+                console.log('Logged User : ', user);
+            }).error(function (error) {
+                $scope.resource = error;
+            });
+        };
+        getUser();
+
+        $scope.logout = function () {
+            $http.post('/logout').success(function (res) {
+                $scope.user = null;
+            }).error(function (error) {
+                console.log("Logout error : ", error);
+            });
+        };
+    });
+
+
+</script>
+
+<body ng-app="GoogleOAuth2Microservice" ng-controller="AppCtrl" ng-cloak="">
+
+<nav class="navbar navbar-default" role="navigation">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>    
+  </div>
+  <a class="navbar-brand" href="#">LeanERP</a>
+  <div class="navbar-collapse collapse">
+    <ul class="nav navbar-nav navbar-left">
+        <li><a href="#"></a></li>
+        <li><a href="#"></a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">{{user.userAuthentication.details.email}}</a></li>
+      <li>
+      	<a class="navbar-brand" href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080" ng-click="logout()">
+              logout
+         </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<div class="container" style="margin-top: 50px;">
+
+    <!-- Login panel -->
+
+    <!-- End Login panel -->
+
+    <!-- Home panel.It will visible after successfull login -->
+    <div class="panel panel-default" ng-show="user">
+        <div class="panel-heading">
+            <img class="p-img" alt="" ng-src="{{user.userAuthentication.details.picture}}"/> Name: {{user.userAuthentication.details.name}}
+        </div>
+        <div class="panel-body">
+            <!-- <div class="col-md-12">Email: {{user.userAuthentication.details.email}}</div>-->
+            <table  class="table" id="myTableId" dt:table="true">
+                <thead>
+                <tr>
+                    <th colspan="2">Information du consultant</th>
+                    <th>Performance du consultant</th>
+                    <th>Liens utiles</th>
+                </tr>
+                </thead>
+                <div class="panel-body" >
+                    <tr  th:each="user, stat : ${currentUser}">
+                        <td> Solde de conges:</td>
+                        <td  >{{user.userAuthentication.principal.soldeConges}}</td>
+                        <td> A definir</td>
+                        <td>
+                            <a href="https://leanovia.net/accueil/timetracker">Time Tracker</a>
+                        </td>
+                    </tr>
+                    <tr th:each="user, stat : ${user}">
+                        <td> Jour de recup:</td>
+                        <td  >{{user.userAuthentication.principal.jourDeRecup}}</td>
+                        <td></td>
+                        <td>
+                            <a href="https://leanovia.net/accueil/bibliotech/livres">Bibleotheque</a>
+                        </td>
+                    </tr>
+                    <tr >
+                        <td> Mission en cours:</td>
+                        <td>{{user.userAuthentication.principal.mission}}</td>
+                        <td></td>
+                        <td>
+                            <a href="/uploadForm">Note de frais</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td> Certification obtenus:</td>
+                        <td >{{user.userAuthentication.principal.certificationObtenues}}</td>
+                    </tr>
+                    <tr>
+                        <td> Certification en cours:</td>
+                        <td>{{user.userAuthentication.principal.certificationEnCours}}</td>
+                    </tr>
+                    <tr >
+                        <td> Livre empuntes:</td>
+                        <td>{{user.userAuthentication.principal.livre}}</td>
+                    </tr>
+                    <tr>
+                        <td> Note de frais en cours:</td>
+                        <td>{{user.userAuthentication.principal.noteFrais}}</td>
+                    </tr>
+                </div>
+
+            </table>
+           
+            <div class="col-md-12">
+                <a href="/editDocument">Manage Documents</a>
+            </div>
+            <div class="col-md-12">
+                <a href="/editUsers">Manage Users</a>
+            </div>
+            <!-- <div class="col-md-12">
+
+                <a href="https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:8080" class="btn btn-default margin-top-5"
+                   ng-click="logout()"> Logout </a>
+            </div>-->
+        </div>
+    </div>
+    <!-- End Home Panel -->
+
+</div>
+</div>
+
+<!-- Including Scripts -->
+
+
+
+</body>
+</html>
