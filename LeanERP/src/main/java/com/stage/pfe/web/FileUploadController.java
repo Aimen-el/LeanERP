@@ -104,7 +104,7 @@ public class FileUploadController {
     @RequestMapping(value = "/download/{id}")
     public String download(@PathVariable long id, HttpServletRequest request, HttpServletResponse http) {
         NoteFrais noteFrais = this.uploadRepository.findOne(id);
-        String lien = "http://" + request.getLocalName() + ":" + request.getLocalPort() + "/files/" + noteFrais.getName();
+        String lien = "http://" + request.getServerName() + ":" + request.getLocalPort() + "/files/" + noteFrais.getName();
         return "redirect:" + lien;
     }
 
