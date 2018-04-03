@@ -34,4 +34,4 @@ security:
       preferTokenInfo: true
 server:
       port:
-        8081
+        8080
