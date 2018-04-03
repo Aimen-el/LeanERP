@@ -10,7 +10,7 @@ spring:
             max-request-size: 128MB
     jpa:
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
         properties:
             dialect: org.hibernate.dialect.MySQL5Dialect
         show-sql: true
@@ -32,3 +32,6 @@ security:
     resource:
       userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
       preferTokenInfo: true
+server:
+      port:
+        8081

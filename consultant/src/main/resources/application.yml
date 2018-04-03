@@ -10,7 +10,7 @@ spring:
             max-request-size: 128MB
     jpa:
         hibernate:
-            ddl-auto: update
+            ddl-auto: none
         properties:
             dialect: org.hibernate.dialect.MySQL5Dialect
         show-sql: true
