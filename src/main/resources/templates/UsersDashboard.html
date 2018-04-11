@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:dt="http://www.thymeleaf.org/dandelion/datatables">
+<link rel="stylesheet" href="/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="/css/app.css"/>
+<head></head>
+<body class="container" style="margin-top: 50px;">
+<div class="panel panel-default">
+    <div class="panel panel-heading" align="center" style="margin: 2px;" >
+        <img class="p-img" th:attr="src=@{${user.getPhoto()}}"/>
+        <div th:text="${user.getName()}" ></div>
+    </div>
+    <div class="panel panel-default" >
+    <table  class="table" id="myTableId" dt:table="true">
+
+        <div>
+            <tr  th:each="user, stat : ${user}">
+                <td> Solde de conges:</td>
+                <td th:text="${user.getSoldeConges()}" ></td>
+
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Jour de recup:</td>
+                <td th:text="${user.getJourDeRecup()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Mission en cours:</td>
+                <td th:text="${user.getMission()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Certification obtenus:</td>
+                <td th:text="${user.getCertificationObtenues()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Certification en cours:</td>
+                <td th:text="${user.getCertificationEnCours()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Livre empuntes:</td>
+                <td th:text="${user.getLivre()}" ></td>
+            </tr>
+            <tr th:each="user, stat : ${user}">
+                <td> Note de frais en cours:</td>
+                <td th:text="${user.getNoteFrais()}" ></td>
+            </tr>
+        </div>
+    </table>
+    </div>
+</div>
+    <div align="right" class="panel-heading">
+        <a href="/" class="btn btn-default margin-top-5" > Home Page </a>
+    </div>
+</body>
+</html>
