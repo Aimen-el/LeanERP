@@ -1,0 +1,31 @@
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        password: consultant
+        url: jdbc:mysql://localhost:3306/erpdb
+        username: consultant
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+        properties:
+            dialect: org.hibernate.dialect.MySQL5Dialect
+        show-sql: true
+    profiles:
+        active: google
+# Spring Security configuration
+security:
+  oauth2:
+    client:
+      clientId: 804680079735-qk5lctsi4f1ligntr20fai0u3ctm0531.apps.googleusercontent.com
+      clientSecret: pNX8Xoz_DYfoUDohSxes46Lh
+      accessTokenUri: https://www.googleapis.com/oauth2/v4/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/v2/auth
+      clientAuthenticationScheme: form
+      scope:
+         openid
+         email
+         profile
+    resource:
+      userInfoUri: https://www.googleapis.com/oauth2/v3/userinfo
+      preferTokenInfo: true
